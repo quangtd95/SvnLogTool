@@ -43,43 +43,32 @@ Public Class Form1
 
         For i As Integer = lines.Count - 1 To 0 Step -1
             Dim s As String = lines(i)
-            'neu file duoc add
             If s.Contains("   A ") Then
-                'get path file
                 Dim path = s.Replace("   A ", "")
-                ' them vao danh sach add
                 If Not fileAdded.Contains(path) Then
                     fileAdded.Add(path)
                 End If
-                'them vao danh sach modify
                 If Not fileList.Contains(path) Then
                     fileList.Add(path)
                 End If
-                'neu trc do lo tay xoa, bi warning thi` xoa warning di
                 If fileDeleteWarning.Contains(path) Then
                     fileDeleteWarning.Remove(path)
                 End If
-                ' neu file dc edit
             ElseIf s.Contains("   M ") Then
                 Dim path = s.Replace("   M ", "")
-                'them vao danh sach modify
                 If Not fileList.Contains(path) Then
                     fileList.Add(path)
                 End If
-                'neu file bi xoa
             ElseIf s.Contains("   D ") Then
                 Dim path = s.Replace("   D ", "")
-                'xoa khoi danh sach file
                 If fileList.Contains(path) Then
                     fileList.Remove(path)
                 End If
-                'neu file nay khong phai do minh add thi danh dau warning
                 If Not fileAdded.Contains(path) Then
                     If Not fileDeleteWarning.Contains(path) Then
                         fileDeleteWarning.Add(path)
                     End If
                 Else
-                    'neu la file cua minh thi xoa no trong danh sach add.
                     fileAdded.Remove(path)
                 End If
             End If
@@ -89,14 +78,6 @@ Public Class Form1
             Exit Sub
         Else
             Dim outData As New StringBuilder
-
-            'outData.AppendLine("These files was added by " & query)
-            'outData.AppendLine("->")
-            'For Each dt In fileAdded
-            '    outData.AppendLine(dt)
-            'Next
-            'outData.AppendLine("=============================================================================================")
-            'outData.AppendLine("")
 
             outData.AppendLine("These files were added/modified by " & query)
             outData.AppendLine("->")
